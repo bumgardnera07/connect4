@@ -3,28 +3,55 @@ require 'bundler/setup'
 require './lib/connect4.rb'
 include Connect4
 
-new_game = Board.new
+game = Board.new
 
-print "Player 1 name?"
-playerOne= gets.to_s
+print "Player 1 name? \n"
+playerOne= gets.to_s.chomp
 
-print "Player 2 name?"
-playerTwo= gets.to_s
+print "Player 2 name? \n"
+playerTwo= gets.to_s.chomp
 
-xMove = "#{playerOne} is up. Place your X"
-oMove = "#{playerTwo} is up. Place your O"
-firstPlayer= nil
+xMove = "#{playerOne} is up. Enter column # for your X."
+oMove = "#{playerTwo} is up. Enter column # for your O."
+upPlayer= nil
 
-while firstPlayer==nil
-    print "Who goes first? (1 or 2)"
-    if gets.to_i == 1
-        firstPlayer=playerOne
-    elsif gets.to_i == 2
-        firstPlayer=playerTwo
+while upPlayer==nil
+    print "Who goes first? (1 for Player One or 2 for Player Two)\n"
+    input=gets.to_i 
+    if  input == 1
+        upPlayer=playerOne
+    elsif input == 2
+        upPlayer=playerTwo
+    end
+    system "clear"
+end
+
+while game.full ==false && game.winner == false
+    case
+    when upPlayer==playerOne
+        valid = false
+        system "clear"
+        puts game.printboard
+        puts xMove
+        until valid
+            valid = game.move(gets.to_i, "X")
+            print "Not a valid move. Try Again\n" if valid == false
+        end
+        upPlayer=playerTwo
+    when upPlayer==playerTwo
+        valid = false
+        system "clear"
+        puts game.printboard
+        puts oMove
+        until valid
+            valid = game.move(gets.to_i, "O")
+            print "Not a valid move. Try Again\n" if valid == false 
+        end
+        upPlayer=playerOne
     end
 end
 
-puts new_game.printboard
-
-
-    
+if game.full
+    print "Game Over. Nobody wins!"
+    exit
+end
