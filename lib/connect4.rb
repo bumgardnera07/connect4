@@ -11,7 +11,7 @@ module Connect4
         
         def print_board
             board = "+#{'---+'*@columns}\n"
-            board << "|#{@columns.times.map{|p|"#{(p+1).to_s.center(3)}|"}.join\n"
+            board << "|#{@columns.times.map{|p|"{#(p+1).to_s.center(3)}|"}.join}\n"
             board << "+#{'---+'*@columns}\n"
             board
         end
