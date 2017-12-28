@@ -24,6 +24,23 @@ module Connect4
         #define ways for the game to end 1:winner, 2: board is full
         
         def winner
+            #see if there are four in a row
+            @columns.times do |c|
+                @rows.times do |r|
+                    check = @slots[c][r]
+                    if check != nil
+                        if (r <= @rows - 4) && [check, @slots[c][r+1], @slots [c][r+2], @slots[c][r+3]].uniq.length == 1
+                            return check
+                        elsif (c <= (@columns - 4)) && [check, @slots[c+1][r], @slots[c+2][r], @slots[c+3][r]].uniq.length == 1
+                            return check
+                        elsif (r >= 3) && (c <= (@columns - 4)) && [check, @slots[c+1][r-1], @slots[c+2][r-2], @slots[c+3][r-3]].uniq.length ==1
+                            return check
+                        elsif (r >= 3) && (c >= (@columns - 4)) && [check, @slots[c-1][r-1], @slots[c-2][r-2], @slots[c-3][r-3]].uniq.length ==1
+                            return check
+                        end
+                    end
+                end
+            end
             return false
         end
         
@@ -32,7 +49,6 @@ module Connect4
             if  fullColumns.all?  #are all the columns full?
                 return true
             else
-                print fullColumns
                 return false
             end
         end

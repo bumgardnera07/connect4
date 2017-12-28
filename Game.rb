@@ -26,12 +26,13 @@ while upPlayer==nil
     system "clear"
 end
 
-while game.full ==false && game.winner == false
+while game.full ==false 
     case
     when upPlayer==playerOne
         valid = false
         system "clear"
         puts game.printboard
+        break if game.winner
         puts xMove
         until valid
             valid = game.move(gets.to_i, "X")
@@ -42,6 +43,7 @@ while game.full ==false && game.winner == false
         valid = false
         system "clear"
         puts game.printboard
+        break if game.winner
         puts oMove
         until valid
             valid = game.move(gets.to_i, "O")
@@ -51,7 +53,18 @@ while game.full ==false && game.winner == false
     end
 end
 
-if game.full
+if game.full 
     print "Game Over. Nobody wins!"
     exit
+end
+
+if game.winner
+    case
+    when game.winner.to_s == "X"
+        puts "Game Over. #{playerOne} wins!"
+        exit
+    when game.winner.to_s == "O"
+        puts "Game Over. #{playerTwo} wins this time!"
+        exit
+    end
 end
