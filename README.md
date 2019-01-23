@@ -7,12 +7,6 @@
     ----------------------------------------------------------------- 
 
 
-Hi there! Welcome to Cloud9 IDE!
+This Ruby was developed using the Cloud9 IDE. The game runs directly in the terminal with the command: "ruby Game.rb"
 
-To get you started, create some files, play with the terminal,
-or visit http://docs.c9.io for our documentation.
-If you want, you can also go watch some training videos at
-http://www.youtube.com/user/c9ide.
-
-Happy coding!
-The Cloud9 IDE team
+<img href ="connect4.png">
